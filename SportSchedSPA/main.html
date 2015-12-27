@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Sport Scheduler</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="Scripts/DataService.js"></script>
+    <script src="main.js"></script>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div id="page-container">
+        <div class="jumbotron text-center">
+            <h1>Sport Scheduler</h1>
+        </div>
+        <div id="page-body">
+            <input data-bind="datePicker : MyDate" type="date" class="form-control">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="table-cell-control">
+                            Title
+                        </th>
+                        <th class="table-cell-control">
+                            Scheduled Time
+                        </th>
+                        <th class="table-cell-control">
+                            Exercise Type
+                        </th>
+                        <th class="table-cell-control">
+                            User
+                        </th>
+                    </tr>
+                </thead>
+                <!-- Load values from viewmodel-->
+                <tbody data-bind="foreach: $root.exercises()">
+                    <tr class="table-row">
+                        <td class="table-cell name cursor">
+                                <p><b data-bind="text: Title "></b></p>
+                                </td>
+                                <td class="table-cell company_name">
+                                    <p><b data-bind="text: moment(ScheduledTime).format('LL')"></b></p>
+                                </td>
+                                <td class="table-cell link">
+                                    <p><b data-bind="text: ExerciseType "></b></p>
+                                </td>
+                                <td class="table-cell vainuLink">
+                                    <p><b data-bind="text: Userid "></b></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </body>
+</html>
