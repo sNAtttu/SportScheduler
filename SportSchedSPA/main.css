@@ -1,2 +1,51 @@
-﻿body {
+﻿html,body {
+    height:100%;
+}
+.page-container-body{
+    height:100%;
+    width:100%;
+    background-color:#4BA2E0;
+    color:white;
+}
+.pageTitle{
+    margin:0px;
+}
+.page-header{
+    padding:5%;
+    margin:0px;
+    background-color:#1E356F;
+}
+.toolbox{
+    width:100%;
+    background-color:#1C55E5;
+}
+.exerciseDatePicker{
+    background-color:#1C55E5;
+    color:white;
+    width:15%;
+}
+.exerciseDatePicker:hover{
+    background-color:#1E356F;
+}
+.showAllButton:hover{
+    background-color:#1E356F;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color:#1E356F;
+}
+.showAllButton{
+    background-color:#1C55E5;
+    color:white;
+    font-size:large;
+    width:85%;
+}
+.page-footer{
+    background-color:#1E356F;
+}
+.list-group-item-bg{
+    background-color:#4BA2E0;
+    color:white;
+}
+.color-white{
+    color:white;
 }

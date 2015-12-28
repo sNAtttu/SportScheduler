@@ -5,6 +5,7 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="main.css" />
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
@@ -13,12 +14,32 @@
 	<meta charset="utf-8" />
 </head>
 <body>
-    <div id="page-container">
-        <div class="jumbotron text-center">
-            <h1>Sport Scheduler</h1>
+    <div id="page-container" class="page-container-body" >
+        <div class="text-center page-header">
+            <h1 class="pageTitle">Sport Scheduler</h1>
         </div>
-        <div id="page-body">
-            <input data-bind="datePicker : MyDate" type="date" class="form-control">
+        <div id="exercise-details" data-bind="visible: !showMainPage()">
+                <div class="exercise-content" data-bind="if: $root.selectedPlannedExercise()">
+                    <div class="exercise-body">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <p class="lead" data-bind="text: $root.selectedPlannedExercise().Title"></p>
+                                <ul class="list-group" style="line-height: 2">
+                                    <li class="list-group-item list-group-item-bg" data-bind="text: $root.selectedPlannedExercise().ExerciseType"></li>
+                                    <li class="list-group-item list-group-item-bg" data-bind="text: $root.selectedPlannedExercise().Userid"> </li>
+                                    <li class="list-group-item list-group-item-bg" data-bind="text: moment($root.selectedPlannedExercise().ScheduledTime).format('LL')"> </li>
+                                </ul>
+                                <button class="btn btn-info btn-block" data-bind="click: CloseExerciseDetails, text: 'Back to calendar'"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div id="page-body" data-bind="visible: showMainPage()">
+            <div id="toolbox" class="toolbox">
+                <input data-bind="datePicker : MyDate" type="date" class="form-control exerciseDatePicker pull-left">
+                <button data-bind="text: 'All exercises', click: ShowAll" id="showAll" class="pull-right form-control showAllButton"></button>
+            </div>
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -37,23 +58,26 @@
                     </tr>
                 </thead>
                 <!-- Load values from viewmodel-->
-                <tbody data-bind="foreach: $root.exercises()">
+                <tbody data-bind="foreach: $root.filteredExercises()">
                     <tr class="table-row">
-                        <td class="table-cell name cursor">
+                        <td class="table-cell" data-bind="event: {click: ExerciseDetailsClick}">
                                 <p><b data-bind="text: Title "></b></p>
                                 </td>
-                                <td class="table-cell company_name">
+                                <td class="table-cell">
                                     <p><b data-bind="text: moment(ScheduledTime).format('LL')"></b></p>
                                 </td>
-                                <td class="table-cell link">
+                                <td class="table-cell">
                                     <p><b data-bind="text: ExerciseType "></b></p>
                                 </td>
-                                <td class="table-cell vainuLink">
+                                <td class="table-cell">
                                     <p><b data-bind="text: Userid "></b></p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div id="page-footer" class="page-footer">
+                    
                 </div>
             </div>
         </body>
