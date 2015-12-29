@@ -22,11 +22,16 @@ ko.bindingHandlers.datePicker = {
 };
 
 var vm = {
+    ExerciseTypes: ko.observableArray(),
+    selectedType: ko.observable(),
     showMainPage: ko.observable(true),
+    showDetailsPage: ko.observable(false),
+    showNewExercisePage: ko.observable(false),
+    AddNewExercise: AddNewExercise,
     EditedExercise: ko.observable(),
     GetFormData: GetFormData,
     EditExerciseDetails: EditExerciseDetails,
-    title:ko.observable("Sport Scheduler"),
+    title: ko.observable("Sport Scheduler"),
     exercises: ko.observableArray(),
     filteredExercises: ko.observableArray(),
     selectedPlannedExercise: ko.observable(),
@@ -34,8 +39,31 @@ var vm = {
     ShowAll: ShowAll,
     ExerciseDetailsClick: ExerciseDetailsClick,
     CloseExerciseDetails: CloseExerciseDetails,
-    log : ko.observable(""),
+    CloseNewExercise: CloseNewExercise,
+    updateExerciseType: updateExerciseType,
+    SaveExercise: SaveExercise,
+    stringValue: ko.observable("Hello"),
+    passwordValue: ko.observable("mypass"),
+    booleanValue: ko.observable(true),
+    optionValues: ["Alpha", "Beta", "Gamma"],
+    selectedOptionValue: ko.observable("Gamma"),
+    multipleSelectedOptionValues: ko.observable(["Alpha"]),
+    radioSelectedOptionValue: ko.observable("Beta")
 };
+
+function SaveExercise(exercise) {
+    console.log(exercise);
+};
+
+function updateExerciseType(data) {
+    console.log(data);
+};
+
+function AddNewExercise() {
+    console.log("Adding new exercise!");
+    vm.showMainPage(false);
+    vm.showNewExercisePage(true);
+}
 
 function GetFormData(formElement) {
     console.log(formElement);
@@ -47,15 +75,23 @@ function EditExerciseDetails(data) {
     console.log(data);
 };
 
+function CloseNewExercise() {
+    console.log("back to calendar");
+    vm.showMainPage(true);
+    vm.showNewExercisePage(false);
+};
+
 function CloseExerciseDetails() {
     console.log("back to calendar");
     vm.showMainPage(true);
+    vm.showDetailsPage(false);
 };
 
 function ExerciseDetailsClick(exercise) {
     vm.selectedPlannedExercise(exercise);
     console.log(exercise);
     vm.showMainPage(false);
+    vm.showDetailsPage(true);
 };
 
 function ShowAll() {
@@ -64,6 +100,7 @@ function ShowAll() {
 };
 
 function initWindow() {
+
     dataserviceStub.GetAllExercises(function (resultData) {
         console.log(resultData);
         resultData.forEach(function (exercise) {
@@ -71,9 +108,19 @@ function initWindow() {
         });
         ko.utils.arrayPushAll(vm.exercises, resultData);
         ko.utils.arrayPushAll(vm.filteredExercises, resultData);
+        console.log("Exercises loaded");
+    });
+
+    dataserviceStub.GetAllExerciseTypes(function (resultData) {
+        console.log(resultData);
+        ko.utils.arrayPushAll(vm.ExerciseTypes, resultData);
         ko.applyBindings(vm);
+        console.log("Types loaded");
     });
 };
+
+vm.selectedType.subscribe(updateExerciseType);
+
 vm.MyDate.subscribe(function (date) {
     vm.filteredExercises([]);
     var parsedDate = moment(date).format("YYYY-MM-DD");

@@ -1,51 +1,83 @@
-﻿html,body {
-    height:100%;
+﻿html, body {
+    height: 100%;
 }
-.page-container-body{
-    height:100%;
-    width:100%;
-    background-color:#4BA2E0;
-    color:white;
+
+.page-container-body {
+    height: 100%;
+    width: 100%;
+    background-color: #4BA2E0;
+    color: white;
 }
-.pageTitle{
-    margin:0px;
+
+.pageTitle {
+    margin: 0px;
 }
-.page-header{
-    padding:5%;
-    margin:0px;
-    background-color:#1E356F;
+
+.page-header {
+    padding: 5%;
+    margin: 0px;
+    background-color: #1E356F;
 }
-.toolbox{
-    width:100%;
-    background-color:#1C55E5;
+
+.toolbox {
+    width: 100%;
+    background-color: #1C55E5;
 }
-.exerciseDatePicker{
-    background-color:#1C55E5;
-    color:white;
-    width:15%;
+
+.toolboxControl {
+    background-color: #1C55E5;
+    color: white;
+    width: 15%;
 }
-.exerciseDatePicker:hover{
-    background-color:#1E356F;
+
+.toolboxControl:hover {
+    background-color: #1E356F;
 }
-.showAllButton:hover{
-    background-color:#1E356F;
+
+.showAllButton:hover {
+    background-color: #1E356F;
 }
+
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color:#1E356F;
+    background-color: #1E356F;
 }
-.showAllButton{
-    background-color:#1C55E5;
-    color:white;
-    font-size:large;
-    width:85%;
+
+.showAllButton {
+    background-color: #1C55E5;
+    color: white;
+    font-size: large;
+    width: 70%;
 }
-.page-footer{
-    background-color:#1E356F;
+
+.length-control{
+    background-color:#082A68;
+    width:100%;
+    color:#fff;
 }
-.list-group-item-bg{
-    background-color:#4BA2E0;
-    color:white;
+
+.page-footer {
+    background-color: #1E356F;
 }
-.color-white{
-    color:white;
+
+.list-group-item-bg {
+    width:50%;
+    background-color: #4BA2E0;
+    color: white;
+    height:5%;
+    font-size:28px;
+}
+
+.color-white {
+    color: white;
+}
+.btn-new-footer{
+    background-color: #1C55E5;
+    margin-top:10px;
+    width:25%;
+}
+.btn-new-footer:hover{
+    background-color: #1E356F;
+}
+#newExercise-footer{
+    width:50%;
 }

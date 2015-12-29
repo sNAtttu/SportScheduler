@@ -177,6 +177,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TrainingTypeController.cs" />
     <Compile Include="Exercise.cs">
       <DependentUpon>SportScheduler.tt</DependentUpon>
     </Compile>
@@ -198,6 +199,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SportScheduler.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainingType.cs">
+      <DependentUpon>SportScheduler.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

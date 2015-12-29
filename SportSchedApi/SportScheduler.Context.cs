@@ -26,5 +26,6 @@ namespace SportSchedApi
         }
     
         public virtual DbSet<Exercise> Exercises { get; set; }
+        public virtual DbSet<TrainingType> TrainingTypes { get; set; }
     }
 }

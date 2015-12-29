@@ -11,33 +11,102 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <script src="Scripts/DataService.js"></script>
     <script src="main.js"></script>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
 </head>
 <body>
-    <div id="page-container" class="page-container-body" >
+    <div id="page-container" class="page-container-body">
         <div class="text-center page-header">
             <h1 class="pageTitle">Sport Scheduler</h1>
         </div>
-        <div id="exercise-details" data-bind="visible: !showMainPage()">
-                <div class="exercise-content" data-bind="if: $root.selectedPlannedExercise()">
-                    <div class="exercise-body">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <p class="lead" data-bind="text: $root.selectedPlannedExercise().Title"></p>
-                                <ul class="list-group" style="line-height: 2">
-                                    <li class="list-group-item list-group-item-bg" data-bind="text: $root.selectedPlannedExercise().ExerciseType"></li>
-                                    <li class="list-group-item list-group-item-bg" data-bind="text: $root.selectedPlannedExercise().Userid"> </li>
-                                    <li class="list-group-item list-group-item-bg" data-bind="text: moment($root.selectedPlannedExercise().ScheduledTime).format('LL')"> </li>
-                                </ul>
-                                <button class="btn btn-info btn-block" data-bind="click: CloseExerciseDetails, text: 'Back to calendar'"></button>
-                            </div>
+        <div id="new-exercise-container" data-bind="visible: showNewExercisePage()">
+            <div id="new-exercise-body" data-bind="if:ExerciseTypes">
+                <select class="form-control list-group-item-bg"
+                        data-bind="options: ExerciseTypes(),
+                                    value: selectedType,
+                                    optionsText: 'TrainingType1',
+                                    optionsCaption: 'Choose exercise....'"></select>
+
+            </div>
+            <div data-bind="if:selectedType">
+                <!--ko if: selectedType().TrainingType1 === 'Running'-->
+
+                <table class="table-bordered" style="width:50%">
+                    <tr>
+                        <td>Title:</td>
+                        <td><input class="form-control length-control" type="text"/></td>
+                    </tr>
+                    <tr class="table-cell">
+                        <td>Length (KM / M):</td>
+                        <td><input class="form-control length-control" type="number" />
+                        <input class="form-control length-control" type="number" /></td>
+                    </tr>
+                    <tr>
+                        <td>Scheduled Date</td>
+                        <td><input class="form-control length-control" type="date" /></td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td><textarea class="form-control length-control"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Type of exercise:</td>
+                        <td>
+                            <label><input type="radio" value="Alpha" data-bind="checked: radioSelectedOptionValue" />Endurance</label>
+                            <label><input type="radio" value="Beta" data-bind="checked: radioSelectedOptionValue" />Sprint</label>
+                            <label><input type="radio" value="Gamma" data-bind="checked: radioSelectedOptionValue" />Relaxed</label>
+                            <label><input type="radio" value="Delta" data-bind="checked: radioSelectedOptionValue" />Fat burning</label>
+                        </td>
+                    </tr>
+                </table>
+                <!--/ko-->
+                <!--ko if: selectedType().TrainingType1 === 'Tennis'-->
+                <span>CHALLENGE A WALL</span>
+                <!--/ko-->
+                <!--ko if: selectedType().TrainingType1 === 'Gym'-->
+                <span>MAKE THE IRON BOW</span>
+                <!--/ko-->
+                <!--ko if: selectedType().TrainingType1 === 'Freestyle'-->
+                <span>FREESTAILA, MATOFAKOFOO</span>
+                <!--/ko-->
+                <!--ko if: selectedType().TrainingType1 === 'Walking'-->
+                <span>YOU ARE WALKING THEN?!</span>
+                <!--/ko-->
+            </div>
+            <div id="newExercise-footer">
+                <button class="form-control btn-new-footer pull-left color-white" data-bind="click: SaveExercise, text: 'Save'"></button>
+                <button class="form-control btn-new-footer pull-right color-white" data-bind="click: CloseNewExercise, text: 'Cancel'"></button>
+            </div>
+            
+        </div>
+        <div id="exercise-details" data-bind="visible: showDetailsPage()">
+            <div class="exercise-content" data-bind="if: $root.selectedPlannedExercise()">
+                <div class="exercise-body">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p class="lead" data-bind="text: $root.selectedPlannedExercise().Title"></p>
+                            <ul class="list-group" style="line-height: 2">
+                                <li class="list-group-item list-group-item-bg" data-bind="text: $root.selectedPlannedExercise().ExerciseType"></li>
+                                <li class="list-group-item list-group-item-bg" data-bind="text: $root.selectedPlannedExercise().Userid"> </li>
+                                <li class="list-group-item list-group-item-bg" data-bind="text: moment($root.selectedPlannedExercise().ScheduledTime).format('LL')"> </li>
+                            </ul>
+                            <button class="btn btn-info btn-block" data-bind="click: CloseExerciseDetails, text: 'Back to calendar'"></button>
+                        </div>
+                        <div class="col-xs-6">
+                            <p class="lead" data-bind="text: 'Here is going to be some awesome details!'"></p>
+                            <ul class="list-group" style="line-height: 2">
+                                <li class="list-group-item list-group-item-bg" data-bind="text: 'Tincho'"></li>
+                                <li class="list-group-item list-group-item-bg" data-bind="text: 'Tincho'"> </li>
+                                <li class="list-group-item list-group-item-bg" data-bind="text: 'Tincho'"> </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         <div id="page-body" data-bind="visible: showMainPage()">
             <div id="toolbox" class="toolbox">
-                <input data-bind="datePicker : MyDate" type="date" class="form-control exerciseDatePicker pull-left">
+                <input data-bind="datePicker : MyDate" type="date" class="form-control toolboxControl pull-left">
+                <button data-bind="text: 'Add exercise', click: AddNewExercise" class="pull-left form-control toolboxControl"></button>
                 <button data-bind="text: 'All exercises', click: ShowAll" id="showAll" class="pull-right form-control showAllButton"></button>
             </div>
             <table class="table table-bordered table-hover">
@@ -61,24 +130,24 @@
                 <tbody data-bind="foreach: $root.filteredExercises()">
                     <tr class="table-row">
                         <td class="table-cell" data-bind="event: {click: ExerciseDetailsClick}">
-                                <p><b data-bind="text: Title "></b></p>
-                                </td>
-                                <td class="table-cell">
-                                    <p><b data-bind="text: moment(ScheduledTime).format('LL')"></b></p>
-                                </td>
-                                <td class="table-cell">
-                                    <p><b data-bind="text: ExerciseType "></b></p>
-                                </td>
-                                <td class="table-cell">
-                                    <p><b data-bind="text: Userid "></b></p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="page-footer" class="page-footer">
-                    
-                </div>
-            </div>
-        </body>
+                            <p><b data-bind="text: Title "></b></p>
+                        </td>
+                        <td class="table-cell">
+                            <p><b data-bind="text: moment(ScheduledTime).format('LL')"></b></p>
+                        </td>
+                        <td class="table-cell">
+                            <p><b data-bind="text: ExerciseType "></b></p>
+                        </td>
+                        <td class="table-cell">
+                            <p><b data-bind="text: Userid "></b></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="page-footer" class="page-footer">
+
+        </div>
+    </div>
+</body>
 </html>

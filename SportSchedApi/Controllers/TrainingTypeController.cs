@@ -1,39 +1,45 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Cors;
 
 namespace SportSchedApi.Controllers
 {
-    [RoutePrefix("api/Exercise")]
-    public class ExerciseController : ApiController
+    [RoutePrefix("api/TrainingType")]
+    public class TrainingTypeController : ApiController
     {
-        public List<Exercise> Get()
+        public List<TrainingType> Get()
         {
-            List<Exercise> exercises = new List<Exercise>();
+            List<TrainingType> types = new List<TrainingType>();
             var dbx = new SportSchedEntities();
-            exercises = dbx.Exercises.Select(e => e).ToList();
-            return exercises;
+            types = dbx.TrainingTypes.Select(e => e).ToList();
+            return types;
         }
         [Route("Seed")]
         public string GetSeed()
         {
-            try {
+            try
+            {
                 var dbx = new SportSchedEntities();
-                Exercise ex = new Exercise { ExerciseType = "Running", ScheduledTime = DateTime.Now, Title = "Aamulenkki", Userid = "Santoro" };
-                Exercise ex1 = new Exercise { ExerciseType = "Tennis", ScheduledTime = DateTime.Now.Date, Title = "Tennis med Stubu", Userid = "Santoro" };
-                Exercise ex2 = new Exercise { ExerciseType = "Running", ScheduledTime = DateTime.Now.Date.AddDays(1), Title = "Saunalenkki", Userid = "Santoro" };
-                dbx.Exercises.Add(ex);
-                dbx.Exercises.Add(ex1);
-                dbx.Exercises.Add(ex2);
+
+                TrainingType type = new TrainingType { TrainingType1 = "Running" };
+                TrainingType type1 = new TrainingType { TrainingType1 = "Tennis" };
+                TrainingType type2 = new TrainingType { TrainingType1 = "Gym" };
+                TrainingType type3= new TrainingType { TrainingType1 = "Walking" };
+                TrainingType type4 = new TrainingType { TrainingType1 = "Freestyle" };
+                dbx.TrainingTypes.Add(type);
+                dbx.TrainingTypes.Add(type1);
+                dbx.TrainingTypes.Add(type2);
+                dbx.TrainingTypes.Add(type3);
+                dbx.TrainingTypes.Add(type4);
                 dbx.SaveChanges();
                 return "OK";
             }
-            catch(DbEntityValidationException dbEx)
+            catch (DbEntityValidationException dbEx)
             {
                 foreach (var validationErrors in dbEx.EntityValidationErrors)
                 {
@@ -47,7 +53,7 @@ namespace SportSchedApi.Controllers
                 }
                 return "NOT OK";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string exception = ex.Message;
                 Trace.TraceInformation(ex.Message);

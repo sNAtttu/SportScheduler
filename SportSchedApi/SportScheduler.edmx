@@ -15,8 +15,16 @@
           <Property Name="Userid" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ExerciseType" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
+        <EntityType Name="TrainingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrainingType" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="SportSchedModelStoreContainer">
           <EntitySet Name="Exercise" EntityType="Self.Exercise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrainingType" EntityType="Self.TrainingType" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -24,6 +32,7 @@
       <Schema Namespace="SportSchedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SportSchedEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Exercises" EntityType="SportSchedModel.Exercise" />
+          <EntitySet Name="TrainingTypes" EntityType="SportSchedModel.TrainingType" />
         </EntityContainer>
         <EntityType Name="Exercise">
           <Key>
@@ -34,6 +43,13 @@
           <Property Name="ScheduledTime" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Userid" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ExerciseType" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TrainingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrainingType1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -48,6 +64,14 @@
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
                 <ScalarProperty Name="ScheduledTime" ColumnName="ScheduledTime" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrainingTypes">
+            <EntityTypeMapping TypeName="SportSchedModel.TrainingType">
+              <MappingFragment StoreEntitySet="TrainingType">
+                <ScalarProperty Name="TrainingType1" ColumnName="TrainingType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

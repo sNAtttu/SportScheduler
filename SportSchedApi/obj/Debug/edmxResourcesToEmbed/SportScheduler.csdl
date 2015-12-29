@@ -2,6 +2,7 @@
 <Schema Namespace="SportSchedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="SportSchedEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Exercises" EntityType="SportSchedModel.Exercise" />
+    <EntitySet Name="TrainingTypes" EntityType="SportSchedModel.TrainingType" />
   </EntityContainer>
   <EntityType Name="Exercise">
     <Key>
@@ -12,5 +13,12 @@
     <Property Name="ScheduledTime" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Userid" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="ExerciseType" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TrainingType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrainingType1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2efacdbd5c5841688e5c11b1412b3145" Name="Diagram1">
         <EntityTypeShape EntityType="SportSchedModel.Exercise" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SportSchedModel.TrainingType" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
